@@ -37,7 +37,7 @@ if (isset($_POST['register'])) {
             $username = mysqli_real_escape_string($conn, $username);
             $password = mysqli_real_escape_string($conn, $password);
             $tgl_lahit = mysqli_real_escape_string($conn, $tgl_lahir);
-            
+
             $qr = "INSERT INTO users (email, username, password, tanggal_lahir) VALUES ('" . $email . "', '" . $username . "', '" . $password . "', '" . $tgl_lahit . "')";
             $result = $conn->query($qr);
             $id = $conn->insert_id;
@@ -62,90 +62,128 @@ if (isset($_POST['register'])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
-    <div>
-        <form action="" method="POST" onsubmit="return validate()">
-            <div class="form-control">
-                <label for="name">Name</label>
-                <input type="text" placeholder="Name" id="name" name="name">
+    <div class="global-container">
+        <div class="card login-form">
+            <div class="card-body">
+                <h1 class="text-center">R E G I S T E R</h1>
             </div>
-            <div class="form-control">
-                <label for="email">Email Address</label>
-                <input type="email" placeholder="Email" id="email" name="email">
+            <div class="card-text">
+                <form action="" method="POST" onsubmit="return validate()">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="text" class="form-control" id="email" name="email" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="cpassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="cpassword" name="cpassword" />
+                    </div>
+                    <div class="mb-3">
+                        <p for="tanggal_lahir" class="form-label">Tanggal Lahir</p>
+                        <p class="title-little">dd/mm/yyyy</p>
+                        <div id="tanggal_lahir" class="input-group mb-3">
+                            <input type="number" class="form-control" id="day" name="day" placeholder="Tanggal" />
+                            <span class="input-group-text">/</span>
+                            <input type="number" class="form-control" name="month" id="month" placeholder="Bulan" />
+                            <span class="input-group-text">/</span>
+                            <input type="number" class="form-control" name="year" id="year" placeholder="Tahun" />
+                        </div>
+                    </div>
+                    <div class="justify-content-between">
+                        <button type="submit" class="btn btn-primary" name="register" id="register">
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="form-control">
-                <label for="username">Username</label>
-                <input type="text" placeholder="Username" id="username" name="username">
-            </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input type="text" placeholder="Password" id="password" name="password">
-            </div>
-            <div class="form-control">
-                <label for="cpassword">Confirm Password</label>
-                <input type="text" placeholder="Confirm Password" id="cpassword" name="cpassword">
-            </div>
-            <div class="form-control">
-                <!-- <label for="tgl_lahir">Tanggal Lahir</label> -->
-                <p>dd/mm/yyyy</p>
-                <input type="text" placeholder="Day" id="day" name="day">
-                <span>/</span>
-                <input type="text" placeholder="Month" id="month" name="month">
-                <span>/</span>
-                <input type="text" placeholder="Year" id="year" name="year">
-                <!-- <input type="date" placeholder="Tanggal Lahir" id="tgl_lahir" name="tgl_lahir"> -->
-            </div>
-            <div class="form-control">
-                <button type="submit" name="register">Register</button>
-            </div>
-        </form>
+        </div>
     </div>
     <script>
-        <?php if (isset($_SESSION['error'])): ?>
+        <?php if (isset($_SESSION['error'])) : ?>
             alert("<?= $_SESSION['error'] ?>");
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
-        <?php if (isset($_SESSION['message'])): ?>
+        <?php if (isset($_SESSION['message'])) : ?>
             alert("<?= $_SESSION['message'] ?>");
             <?php unset($_SESSION['message']); ?>
         <?php endif; ?>
+        const btnSubmit = document.getElementById("register");
 
-        function validate() {
-            const password = document.getElementById('password').value;
-            const cpassword = document.getElementById('cpassword').value;
+        const tglDoc = document.getElementById('tgl');
+        tglDoc.addEventListener('input', (e) => {
+            const val = e.target.value;
+            if (val && val > 31) {
+                tglDoc.value = 0
+            }
+        })
 
-            const day = document.getElementById('day').value;
-            const month = document.getElementById('month').value;
-            const year = document.getElementById('year').value;
+        const blnDoc = document.getElementById('bln');
+        blnDoc.addEventListener('input', (e) => {
+            const val = e.target.value;
+            if (val && val > 12) {
+                blnDoc.value = 0
+            }
+        })
 
-            if (isNaN(day) || isNaN(month) || isNaN(year)) {
-                alert('Tanggal Lahir harus diisi dengan angka');
+        const validate = () => {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const c_password = document.getElementById("cpassword").value;
+            const tgl = document.getElementById("day").value;
+            const bln = document.getElementById("month").value;
+            const thn = document.getElementById("year").value;
+
+            if (password != c_password) {
+                alert("Password does not match");
+                return false;
+            }
+            if (
+                name == "" ||
+                email == "" ||
+                username == "" ||
+                password == "" ||
+                c_password == ""
+            ) {
+                alert("All fields are required");
                 return false;
             }
 
-            if (day > 31 || day < 1) {
-                alert("Tanggal lebih dari 31 atau 1")
-                return false
-            }
-            if (month > 12 || month < 1) {
-                alert("Bulan lebih dari 12 atau 1")
+            // buat logika untuk format bulan mm tanggal dd tahun yyyy
+            if (
+                !(
+                    (bln.length > 0 && bln.length < 2) ||
+                    (tgl.length > 0 && tgl.length < 2) ||
+                    (thn.length > 0 && thn.length < 2) ||
+                )
+            ) {
+                alert("Format tanggal lahir salah");
                 return false;
             }
-            if (year.length != 4) {
-                alert("Tahun harus 4 digit")
-                return false;
-            }
-            if (password != cpassword) {
-                alert('Password does not match');
-                return false;
-            }
+
             return true;
-        }
+        };
     </script>
 </body>
 

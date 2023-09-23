@@ -1,7 +1,11 @@
 html,
 body {
-  height: 105%;
+  height: 100%;
   background-color: #222d32;
+}
+
+h1 {
+  font-weight: 900;
 }
 
 .global-container {
@@ -14,8 +18,8 @@ body {
 
 .login-form {
   width: 380px;
-  height: 450px;
-  padding: 20px;
+  height: auto;
+  padding: 18px;
   background-color: #1a2226 !important;
   border-radius: 10px !important;
 }
@@ -28,6 +32,23 @@ body {
   border-radius: 10px !important;
 }
 
+
+/* input[type="number"] {
+  background-color: #1a2226;
+} */
+
+.input-group-text {
+  color: rgb(209, 205, 199);
+  background-color: rgb(35, 38, 39);
+  border-color: rgb(60, 65, 68);
+}
+
+.form-control {
+  color: rgb(209, 205, 199);
+  background-color: rgb(24, 26, 27);
+  border-color: rgb(60, 65, 68);
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -35,7 +56,7 @@ input[type="password"] {
   color: #fff;
   border: 2px solid #00ff00;
   border-radius: 10px;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
 
 input[type="text"]:focus,
@@ -45,6 +66,13 @@ input[type="password"]:focus {
   border: none;
   background: #1a2226;
   color: #fff;
+  /* margin: 0; */
+  margin-top: 4px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
   margin: 0;
 }
 
@@ -58,4 +86,10 @@ input[type="password"]:focus {
   color: #000 !important;
   font-size: 14px;
   border-radius: 10px;
+}
+
+
+.title-little {
+  font-weight: 200;
+  font-size: 13px;
 }
