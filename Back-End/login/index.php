@@ -28,7 +28,7 @@ if (isset($_POST['login'])) {
     $qur = "SELECT * FROM users WHERE $type = '$username'";
     $result = $db->query($qur);
     $user = mysqli_fetch_assoc($result);
-    if ($result->num_rows > 0) {
+    if ($result->num_rows > 0 && $user['password'] == $password) {
         $qr = "UPDATE roles SET status = '1' WHERE user_id = '" . $user['id'] . "'";
         $db->query($qr);
 

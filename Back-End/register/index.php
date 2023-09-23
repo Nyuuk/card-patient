@@ -175,7 +175,7 @@ if (isset($_POST['register'])) {
                 !(
                     (bln.length > 0 && bln.length < 2) ||
                     (tgl.length > 0 && tgl.length < 2) ||
-                    (thn.length > 0 && thn.length < 2) ||
+                    (thn.length > 0 && thn.length < 2)
                 )
             ) {
                 alert("Format tanggal lahir salah");
